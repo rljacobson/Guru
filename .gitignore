@@ -1,0 +1,15 @@
+# Boring file regexps:
+*.scssc
+*.sassc
+*~
+*.orig
+*.patch
+*.pyc
+*.pyo
+
+# PyCharm stuff.
+.idea
+
+# Non source code stuff.
+/build
+/dist

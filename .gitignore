@@ -1,11 +1,11 @@
-# Boring file regexps:
-*.scssc
-*.sassc
-*~
-*.orig
+# Ignore these files.
+*.DS_Store # Mac OS X system file, similar to Desktop.ini on windows.
 *.patch
 *.pyc
 *.pyo
+
+*.sagews
+
 
 # PyCharm stuff.
 .idea
@@ -13,3 +13,6 @@
 # Non source code stuff.
 /build
 /dist
+# Eventually the libraries we use will be committed into the repository.
+# For now, we exclude then from git.
+/lib

@@ -1,0 +1,131 @@
+// Bootstrap stuff
+@import (reference) "../../../lib/bootstrap-3.1.0/less/variables.less";
+@import (reference) "../../../lib/bootstrap-3.1.0/less/mixins.less";
+@import (reference) "../../../lib/bootstrap-3.1.0/less/panels.less";
+
+// Color variables
+@cell-input-background: white;
+@cell-output-background: white;
+@content-container-background: white;
+@cell-separator-color: @gray-light;
+
+// Document properties
+@document-margins: 1in;
+@document-margin-top: @document-margins;
+@document-margin-left: @document-margins;
+@document-margin-right: @document-margins;
+@document-margin-bottom: @document-margins;
+
+
+// Utilities / Mixins
+.fade-hover(@visible-start, @visible-end, @fade-hover-time: .25s){
+  /*
+  The element starts with opacity @visible-start and fades to opacity
+  @visible-end on hover.
+  */
+
+  // The element starts life with visibility @visible.
+  opacity: @visible-start;
+
+  -webkit-transition: opacity @fade-hover-time ease-in-out;
+  -moz-transition: opacity @fade-hover-time ease-in-out;
+  -o-transition: opacity @fade-hover-time ease-in-out;
+  -ms-transition: opacity @fade-hover-time ease-in-out;
+  transition: opacity @fade-hover-time ease-in-out;
+
+  &:hover{
+    opacity: @visible-end;
+  }
+}
+
+
+// Document content container
+.content-container{
+  margin-left: @document-margin-left;
+  margin-right: @document-margin-right;
+  margin-top: @document-margin-top;
+  margin-bottom: @document-margin-bottom;
+
+  padding-top: .25in;
+  padding-bottom: .25in;
+
+  /*
+  border-top: dotted 1px @gray-light;
+  border-bottom: dotted 1px @gray-light;
+  */
+
+  background: @content-container-background;
+
+}
+
+// Cells
+.cell{
+  .panel;
+  .panel-default;
+  padding-left: none;
+  padding-top: none;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+.cell-input{
+  .panel-body;
+  padding-left: none;
+  padding-top: none;
+  background-color: @cell-input-background;
+}
+
+.cell-output{
+  .panel-footer;
+  font-family: @font-family-monospace;
+}
+
+.cell-new-phantom{
+  .cell;
+  .fade-hover(0, 1);
+}
+
+/*
+  The cell separator is the thing between cells that a user can
+  click on to insert a new cell.
+*/
+.cell-separator{
+  .fade-hover(0, 1, .2s);
+
+  padding: 0;
+  margin: 0;
+  height: 30px;
+  width: 100%;
+
+  border-top: solid 1px @cell-separator-color;
+}
+
+// CodeMirror
+
+//Editor properties
+.CodeMirror{
+  font-size: 14pt;
+  background: @cell-input-background;
+}
+
+//Gutter color and border properties
+.CodeMirror-gutters{
+  background: @cell-input-background;
+  border-right: solid 1px @gray-lighter;
+}
+
+//Line numbering font properties
+.CodeMirror-linenumber{
+  font-size: 12pt;
+  color: #c8c8c8;
+}
+
+//The following two blocks cause CodeMirror to automatically resize to fit its contents.
+.CodeMirror {
+  //border: 1px solid #eee;
+  height: auto;
+}
+.CodeMirror-scroll {
+  overflow-y: hidden;
+  overflow-x: auto;
+}

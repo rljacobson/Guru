@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Untitled.sagews</title>
+
+    <!-- jQuery. -->
+    <script src="../../lib/jquery-2.1.0.js"></script>
+
+    <!-- Base CodeMirror requirements. -->
+    <script src="../../lib/codemirror-3.21/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="../../lib/codemirror-3.21/lib/codemirror.css">
+
+    <!-- Required for CodeMirror's Python mode. -->
+    <script src="../../lib/codemirror-3.21/mode/python/python.js"></script>
+
+    <!-- Required for CodeMirror's HTML mixed mode. -->
+    <script src="../../lib/codemirror-3.21/mode/xml/xml.js"></script>
+    <script src="../../lib/codemirror-3.21/mode/javascript/javascript.js"></script>
+    <script src="../../lib/codemirror-3.21/mode/css/css.js"></script>
+    <script src="../../lib/codemirror-3.21/mode/htmlmixed/htmlmixed.js"></script>
+
+    <!-- Guru's document styles. -->
+    <link rel="stylesheet" href="css/Guru.css">
+
+    <script>
+        function startupstuff(){
+            //Create CodeMirror Object
+            var elmt = $("#exampleinputcell1")[0];
+            var codetag = $("#examplecode1");
+            var examplecode = codetag.html();
+            codetag.remove();
+            var CMObject = {
+                value: examplecode,
+                mode: "htmlmixed",
+                lineWrapping: true,
+                lineNumbers: false,
+                autofocus: true,
+                indentUnit: 4
+            }
+            CodeMirror(elmt, CMObject);
+
+            elmt = $("#exampleinputcell2")[0];
+            codetag = $("#examplecode2");
+            examplecode = codetag.html();
+            codetag.remove();
+            var CMObject = {
+                value: examplecode,
+                mode: "python",
+                lineWrapping: true,
+                lineNumbers: true,
+                indentUnit: 4
+            }
+            CodeMirror(elmt, CMObject);
+
+
+            //window.setInterval("location.reload();", 10000);
+        }
+    </script>
+
+</head>
+<body onload="startupstuff();">
+
+<div class="content-container">
+
+    <div class="cell">
+        <div class="cell-input" id="exampleinputcell1">
+            <code id="examplecode1">The pythagorean formula can be used to find the roots of a quadratic function of the form $f(x) = ax^2 + bx + c$. The formula is $x\; =\; \frac {-b\; \pm\; \sqrt {b^2\; -\; 4ac}}{2a}$.
+            </code>
+        </div>
+        <div class="cell-output">
+            Some latex output here.
+        </div>
+    </div>
+
+    <div class="cell-separator"></div>
+
+    <div class="cell">
+        <div class="cell-input" id="exampleinputcell2">
+            <code id="examplecode2">
+import itertools
+
+def iter_primes():
+     # an iterator of all numbers between 2 and +infinity
+     numbers = itertools.count(2)
+
+     # generate primes forever
+     while True:
+         # get the first number from the iterator (always a prime)
+         prime = numbers.next()
+         yield prime
+
+         # this code iteratively builds up a chain of
+         # filters...slightly tricky, but ponder it a bit
+         numbers = itertools.ifilter(prime.__rmod__, numbers)
+
+for p in iter_primes():
+    if p > 1000:
+        break
+    print p
+
+            </code>
+        </div>
+        <div class="cell-output">
+            Hello, world!<br>
+            -cos(x)
+        </div>
+    </div>
+
+    <div class="cell-new-phantom">
+        <br><br><br><br><br><br><br><br><br><br>
+    </div>
+
+</div>
+
+</body>
+</html>

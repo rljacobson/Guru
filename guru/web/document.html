@@ -19,8 +19,29 @@
     <script src="../../lib/codemirror-3.21/mode/css/css.js"></script>
     <script src="../../lib/codemirror-3.21/mode/htmlmixed/htmlmixed.js"></script>
 
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        showProcessingMessages: false,
+        messageStyle: "none",
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true,
+          ignoreClass: "cell-input",
+          skipTags: ["script","noscript","style","textarea","pre","code","annotation","annotation-xml"]
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] }
+      });
+    </script>
+    <script src="../../lib/MathJax-2.3/unpacked/MathJax.js"></script>
+
     <!-- Guru's document styles. -->
     <link rel="stylesheet" href="css/Guru.css">
+    <!-- Guru's scripts. -->
+    <script src="js/document.js"></script>
 
     <script>
         function startupstuff(){
@@ -60,24 +81,42 @@
 </head>
 <body onload="startupstuff();">
 
-<div class="content-container">
+<div class="document-container">
+    <div class="content-container">
 
-    <div class="cell">
-        <div class="cell-input" id="exampleinputcell1">
-            <code id="examplecode1">The pythagorean formula can be used to find the roots of a quadratic function of the form $f(x) = ax^2 + bx + c$. The formula is $x\; =\; \frac {-b\; \pm\; \sqrt {b^2\; -\; 4ac}}{2a}$.
-            </code>
+        <div class="cell">
+
+            <div class="fold-control-open cell-fold-control"></div>
+            <div class="fold-control-wrapper">
+            <div class="cell-input" id="exampleinputcell1">
+
+                <div class="fold-control-open cell-input-fold-control"></div>
+
+                <code id="examplecode1">The pythagorean formula can be used to find the roots of a quadratic function of the form $f(x) = ax^2 + bx + c$. The formula is $x\; =\; \frac {-b\; \pm\; \sqrt {b^2\; -\; 4ac}}{2a}$.
+                </code>
+            </div>
+
+
+
+            <div class="cell-output">
+
+                <div class="fold-control-open cell-output-fold-control"></div>
+                <div class="fold-control-wrapper">
+                <p>The pythagorean formula can be used to find the roots of a quadratic function of the form $f(x) = ax^2 + bx + c$. The formula is $x\; =\; \frac {-b\; \pm\; \sqrt {b^2\; -\; 4ac}}{2a}$.</p>
+                </div>
+            </div>
+            </div>
+
         </div>
-        <div class="cell-output">
-            Some latex output here.
-        </div>
-    </div>
 
-    <div class="cell-separator"></div>
+        <div class="cell-separator"></div>
 
-    <div class="cell">
-        <div class="cell-input" id="exampleinputcell2">
-            <code id="examplecode2">
-import itertools
+        <div class="cell">
+            <div class="fold-control-open cell-fold-control"></div>
+            <div class="fold-control-wrapper">
+            <div class="cell-input" id="exampleinputcell2">
+                <div class="fold-control-open cell-input-fold-control"></div>
+                <code id="examplecode2">import itertools
 
 def iter_primes():
      # an iterator of all numbers between 2 and +infinity
@@ -94,23 +133,28 @@ def iter_primes():
          numbers = itertools.ifilter(prime.__rmod__, numbers)
 
 for p in iter_primes():
-    if p > 1000:
+    if p &gt; 100:
         break
-    print p
+    sys.stdout.write("%d "%p)</code>
+            </div>
 
-            </code>
+
+            <div class="cell-output">
+                <div class="fold-control-open cell-output-fold-control"></div>
+                <div class="fold-control-wrapper">
+                <p>2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 </p>
+                </div>
+            </div>
+            </div>
         </div>
-        <div class="cell-output">
-            Hello, world!<br>
-            -cos(x)
+
+        <div class="cell-new-phantom">
+            <br><br><br><br><br><br><br><br><br><br>
         </div>
-    </div>
 
-    <div class="cell-new-phantom">
-        <br><br><br><br><br><br><br><br><br><br>
     </div>
-
 </div>
+
 
 </body>
 </html>

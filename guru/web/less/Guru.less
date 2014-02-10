@@ -1,13 +1,16 @@
-// Bootstrap stuff
-@import (reference) "../../../lib/bootstrap-3.1.0/less/variables.less";
-@import (reference) "../../../lib/bootstrap-3.1.0/less/mixins.less";
-@import (reference) "../../../lib/bootstrap-3.1.0/less/panels.less";
+@import (reference) "utilities.less";
+
+// I let CodeMirror manage the input font family.
+//@cell-input-font: @font-family-monospace;   // Used in CodeMirror.
+@cell-output-font: @font-family-sans-serif; // Used in cell-output.
 
 // Color variables
 @cell-input-background: white;
-@cell-output-background: white;
-@content-container-background: white;
+@cell-output-background: @gray-lightest;
+@document-background: white;
+@content-container-background: @document-background;
 @cell-separator-color: @gray-light;
+@body-background: @gray-light;
 
 // Document properties
 @document-margins: 1in;
@@ -15,44 +18,41 @@
 @document-margin-left: @document-margins;
 @document-margin-right: @document-margins;
 @document-margin-bottom: @document-margins;
+@document-width-total: 11in;
+@document-width: @document-width-total - @document-margin-right - @document-margins;
 
+// Cell properties
+@cell-folder-control-border: solid 1px @cell-separator-color;
 
-// Utilities / Mixins
-.fade-hover(@visible-start, @visible-end, @fade-hover-time: .25s){
-  /*
-  The element starts with opacity @visible-start and fades to opacity
-  @visible-end on hover.
-  */
-
-  // The element starts life with visibility @visible.
-  opacity: @visible-start;
-
-  -webkit-transition: opacity @fade-hover-time ease-in-out;
-  -moz-transition: opacity @fade-hover-time ease-in-out;
-  -o-transition: opacity @fade-hover-time ease-in-out;
-  -ms-transition: opacity @fade-hover-time ease-in-out;
-  transition: opacity @fade-hover-time ease-in-out;
-
-  &:hover{
-    opacity: @visible-end;
-  }
+// Document stuff
+body{
+  background: @body-background;
 }
 
+// This contains the document.
+.document-container{
+  padding: none;
+  margin-bottom: none;
+  margin-top: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: @document-width-total;
+  background: @document-background;
 
-// Document content container
+  box-shadow: 0px 0px 10px #000;
+  border: solid 1px black;
+}
+// This IS the document.
 .content-container{
+  padding: none;
   margin-left: @document-margin-left;
   margin-right: @document-margin-right;
   margin-top: @document-margin-top;
   margin-bottom: @document-margin-bottom;
+  width: @document-width;
 
-  padding-top: .25in;
-  padding-bottom: .25in;
-
-  /*
-  border-top: dotted 1px @gray-light;
-  border-bottom: dotted 1px @gray-light;
-  */
+  // Uncomment to see doc area extent.
+  //border: dotted 1px @gray-light;
 
   background: @content-container-background;
 
@@ -60,29 +60,91 @@
 
 // Cells
 .cell{
-  .panel;
-  .panel-default;
+
+  position: relative;
+
+  //.hairline-shadow-border();
+
   padding-left: none;
-  padding-top: none;
+  padding-top: 3px;
   margin-top: 0px;
   margin-bottom: 5px;
+
 }
 
 .cell-input{
-  .panel-body;
+  position: relative;
+
+  padding: 15px;
   padding-left: none;
   padding-top: none;
   background-color: @cell-input-background;
 }
 
 .cell-output{
-  .panel-footer;
-  font-family: @font-family-monospace;
+  position: relative;
+
+  padding: 10px 15px;
+
+  // Border / Background Stuff.
+
+  background: @cell-output-background;
+  /*
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  */
+  .hairline-shadow-border();
+
+  font-family: @cell-output-font;
 }
 
-.cell-new-phantom{
-  .cell;
+.fold-control(){
+  position: absolute;
+  height: 100%;
+  top: 0px;
+
+  width: 10px;
+  margin: none;
+  padding: none;
+  border-left: @cell-folder-control-border;
+  border-right: none;
+  border-top: @cell-folder-control-border;
+  border-bottom: @cell-folder-control-border;
+}
+
+.fold-control-open{
+  .fold-control();
   .fade-hover(0, 1);
+}
+
+.fold-control-closed{
+  .fold-control();
+  .fade-hover(.3, 1);
+}
+
+.fold-control-wrapper{
+  // Needs no styling, apparently.
+}
+
+.fold-control-wrapper-closed{
+  // Needs no styling, apparently.
+}
+
+
+.cell-fold-control{
+  //.fold-control();
+  left: -22px;
+}
+
+.cell-input-fold-control{
+  //.fold-control();
+  left: -10px;
+}
+
+.cell-output-fold-control{
+  //.fold-control();
+  left: -10px;
 }
 
 /*
@@ -90,7 +152,7 @@
   click on to insert a new cell.
 */
 .cell-separator{
-  .fade-hover(0, 1, .2s);
+  .fade-hover(0, 1, 0s);
 
   padding: 0;
   margin: 0;
@@ -100,10 +162,22 @@
   border-top: solid 1px @cell-separator-color;
 }
 
+/*
+  The "phantom" cell is the thing at the bottom of the worksheet
+  to insert a new cell.
+*/
+.cell-new-phantom{
+  .cell;
+  .hairline-shadow-border;
+  .fade-hover(0, 1);
+}
+
+
 // CodeMirror
 
 //Editor properties
 .CodeMirror{
+  //font-family: @cell-input-font;
   font-size: 14pt;
   background: @cell-input-background;
 }

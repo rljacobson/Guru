@@ -1,0 +1,43 @@
+// Color variables
+@gray-darker:  lighten(#000, 13.5%); // #222
+@gray-dark:    lighten(#000, 20%);   // #333
+@gray:         lighten(#000, 33.5%); // #555
+@gray-light:   lighten(#000, 60%);   // #999
+@gray-lighter: lighten(#000, 93.5%); // #eee
+@gray-lightest: lighten(#000, 97%); // #eee
+
+// Font variables
+@font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-serif:       Georgia, "Times New Roman", Times, serif;
+@font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
+@font-family-base:        @font-family-sans-serif;
+
+// Utilities / Mixins
+.fade-hover(@visible-start, @visible-end, @fade-hover-time: .25s){
+  /*
+  The element starts with opacity @visible-start and fades to opacity
+  @visible-end on hover.
+  */
+
+  // The element starts life with visibility @visible.
+  opacity: @visible-start;
+
+  -webkit-transition: opacity @fade-hover-time ease-in-out;
+  -moz-transition: opacity @fade-hover-time ease-in-out;
+  -o-transition: opacity @fade-hover-time ease-in-out;
+  -ms-transition: opacity @fade-hover-time ease-in-out;
+  transition: opacity @fade-hover-time ease-in-out;
+
+  &:hover{
+    opacity: @visible-end;
+  }
+}
+
+.hairline-shadow-border(){
+  // This gives a hairline shadow border similar to Bootstrap panels.
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-color: #dddddd;
+}

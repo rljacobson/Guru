@@ -12,6 +12,7 @@
 
 # Derived data.
 css
+js
 
 # Non source code stuff.
 /build
